@@ -9,19 +9,36 @@
     <link rel="stylesheet" href="./node_modules/bulma/css/bulma.min.css">
     <style>
         #container {
-            background-image: url("img/Field_500px.jpg");
-            width: 714px;
-            height: 500px;
+            background-image: url("img/Main_w960.jpg");
+            background-repeat: no-repeat;
+            width: 1024px;
+            height: 686px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container" id="container"></div>
+    <section class="section">
+        <div class="container" id="container" onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()"></div>
+        <div id="xycoordinates"></div>
+    </section>
 
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     <script src="https://cdn.rawgit.com/konvajs/konva/2.3.0/konva.min.js"></script>
     <script src="app.js"></script>
+
+    <script>
+        function cnvs_getCoordinates(e) {
+            x = e.clientX;
+            y = e.clientY;
+            document.getElementById("xycoordinates").innerHTML = "Coordinates: (" + x + "," + y + ")";
+        }
+
+        function cnvs_clearCoordinates() {
+            document.getElementById("xycoordinates").innerHTML = "";
+        }
+    </script>
+
 </body>
 
 </html>
