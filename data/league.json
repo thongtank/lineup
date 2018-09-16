@@ -1,0 +1,36 @@
+{
+    "epl": {
+        "name": "English Premier League",
+        "short_name": "epl",
+        "teams": [{
+                "name": "Liverpool",
+                "logo": "liverpool.png"
+            },
+            {
+                "name": "Manchester United",
+                "logo": "manu.png"
+            },
+            {
+                "name": "Chelsea",
+                "logo": "chelsea.png"
+            }
+        ]
+    },
+    "isa": {
+        "name": "Serie A",
+        "short_name": "isa",
+        "teams": [{
+                "name": "AC Milan",
+                "logo": "ac_milan.png"
+            },
+            {
+                "name": "Roma",
+                "logo": "roma.png"
+            },
+            {
+                "name": "Juventus",
+                "logo": "juventus.png"
+            }
+        ]
+    }
+}
