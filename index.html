@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lineup</title>
-    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <style>
         #container {
             background-image: url("./img/Field.jpg");
@@ -14,39 +14,51 @@
             width: 1200px;
             height: 627px;
         }
-        div.field > div, button {
-            margin: 5px;
+
+        div.field>div,
+        button {
+            margin: 5px 5px;
+        }
+
+        #player {
+            padding-top: 15px;
         }
     </style>
 </head>
 
 <body>
-    <div id="container" onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()"></div>
-    <div id="xycoordinates"></div>
-    <div>
-        <div class="field is-horizontal">
-            <div class="select">
-                <select id="league">
-                    <option value="">Select League</option>
-                </select>
+    <div class="columns">
+        <div class="" id="container" onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()"></div>
+        <div class="" id="player">
+            <div class="field">
+                <div class="select">
+                    <select id="league">
+                        <option value="">Select League</option>
+                    </select>
+                </div>
             </div>
-            <div class="select">
-                <select id="team">
-                    <option value="">Select Team</option>
-                </select>
+            <div class="field">
+                <div class="select">
+                    <select id="team">
+                        <option value="">Select Team</option>
+                    </select>
+                </div>
             </div>
-            <div class="select">
-                <select id="formation">
-                    <option>Select Formation</option>
-                </select>
+            <div class="field">
+                <div class="select">
+                    <select id="formation">
+                        <option>Select Formation</option>
+                    </select>
+                </div>
             </div>
             <button id="create" class="button is-success">Create</button>
         </div>
     </div>
-
+    </div>
+    <div id="xycoordinates"></div>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     <script src="https://cdn.rawgit.com/konvajs/konva/2.3.0/konva.min.js"></script>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="app.js"></script>
     <script>
         function cnvs_getCoordinates(e) {
