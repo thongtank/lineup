@@ -115,7 +115,7 @@ $(function () {
                 layer.add(textNode);
                 layer.draw();
 
-                textNode.on('click', () => {
+                textNode.on('click', function() {
                     // create textarea over canvas with absolute position
 
                     // first we need to find its positon
