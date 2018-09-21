@@ -73,7 +73,7 @@ $(function () {
         bgObj.src = './img/Field.jpg';
         // End - create stage fot field
 
-        $.each(formationJSON[formation], function (key, val) {
+        $.each(formationJSON[formation].formation, function (key, val) {
             // console.log(val);
             if (key == 'plan') {
                 return true;
