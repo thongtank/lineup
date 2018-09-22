@@ -25,7 +25,7 @@ $.getJSON("./data/formation.json", function (data) {
     formationJSON = data;
 });
 
-var createImageAndText = (val, img_src, stage, layer) => {
+var createImageAndText = (val, img_src, stage, layer, isCoach) => {
     var x = val.x - 21;
     var y = val.y - 21;
     var imageObj = new Image();
@@ -51,17 +51,32 @@ var createImageAndText = (val, img_src, stage, layer) => {
         layer.add(logoTeam);
         stage.add(layer);
 
+        var alignText, textColor;
+        if (isCoach) {
+            // If Coach
+            x = x + 75;
+            y = y + 11;
+            alignText = 'left';
+            textColor = '#000';
+        } else {
+            // If player
+            x = x - 65;
+            y = y + 75;
+            alignText = 'center';
+            textColor = '#fff';
+        }
+
         let textNode = new Konva.Text({
             text: "Click to edit",
-            x: x - 65,
-            y: y + 75,
-            fontSize: 18,
-            fill: "#fff",
-            align: "center",
+            x: x,
+            y: y,
+            fontSize: 28,
+            fill: textColor,
+            align: alignText,
             width: 200,
-            fontFamily: "Notable",
+            fontFamily: "Anton",
             stroke: "#000",
-            strokeWidth: 0.5
+            strokeWidth: 0.3
 
         });
         layer.add(textNode);
@@ -75,7 +90,7 @@ var createImageAndText = (val, img_src, stage, layer) => {
             var stageBox = stage.getContainer().getBoundingClientRect();
 
             var areaPosition = {
-                x: textPosition.x + stageBox.left + 45,
+                x: textPosition.x + stageBox.left,
                 y: textPosition.y + stageBox.top
             };
 
@@ -88,7 +103,7 @@ var createImageAndText = (val, img_src, stage, layer) => {
             textarea.style.position = "absolute";
             textarea.style.top = areaPosition.y + "px";
             textarea.style.left = areaPosition.x + "px";
-            textarea.style.width = textNode.width();
+            textarea.style.width = textNode.width() + "px";
 
             textarea.focus();
 
@@ -98,7 +113,11 @@ var createImageAndText = (val, img_src, stage, layer) => {
                     if (textarea.value == '') {
                         textNode.text(textNode.text());
                     } else {
-                        textNode.text(textarea.value);
+                        if (isCoach) {
+                            textNode.text(`Coach:\n${textarea.value}`);
+                        } else {
+                            textNode.text(`${textarea.value}`);
+                        }
                     }
                     layer.draw();
                     document.body.removeChild(textarea);
@@ -173,13 +192,24 @@ $(function () {
                 strokeWidth: 1,
                 width: 250,
                 align: "center",
-                fontFamily: "Notable",
-                fontSize: 40,
+                fontFamily: "Anton",
+                fontSize: 45,
                 fill: "#fff"
             });
             layer.add(txtHA);
             stage.add(layer);
             // End - add Text Home/Away
+
+            var box = new Konva.Rect({
+                x: 0,
+                y: 492,
+                fill: '#fff',
+                draggable: false,
+                width: 320,
+                height: 100
+            });
+            layer.add(box);
+            stage.add(layer);
         };
         bgObj.src = "./img/Field.jpg";
         // End - create stage fot field
@@ -216,27 +246,14 @@ $(function () {
 
         // Begin - Create Logo for formation
         $.each(formationJSON[formation].formation, function (key, val) {
-            createImageAndText(val, img_src, stage, layer);
+            createImageAndText(val, img_src, stage, layer, false);
         });
         // End - Create Logo for formation
 
-        var box = new Konva.Rect({
-            x: 0,
-            y: 627 - 50,
-            fill: 'black',
-            stroke: "black",
-            strokeWidth: 2,
-            draggable: false,
-            width: 100,
-            height: 50
-        });
-        layer.add(box);
-        stage.add(layer);
-        
         var positonCoach = {
-            "x": 99,
+            "x": 52,
             "y": 527
         };
-        createImageAndText(positonCoach, img_src, stage, layer);
+        createImageAndText(positonCoach, img_src, stage, layer, true);
     });
 });
