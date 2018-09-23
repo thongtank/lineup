@@ -5,6 +5,7 @@ var height = $div.offsetHeight;
 const $s_league = $("select#league");
 const $s_team = $("select#team");
 const $s_formation = $("select#formation");
+const $r_weblogo = $("input[name='logo']");
 
 $.getJSON("./data/league.json", function (data) {
     $.each(data, function (key, val) {
@@ -128,6 +129,34 @@ var createImageAndText = (val, img_src, stage, layer, isCoach) => {
 };
 
 $(function () {
+    // Begin - create stage for field
+    var stage = new Konva.Stage({
+        container: "container",
+        width: 1200,
+        height: 627
+    });
+
+    $r_weblogo.change(function() {
+        var layer = new Konva.Layer();
+        stage.add(layer);
+        
+        let webLogo = $(this)[0].defaultValue;
+        // Begin - Website Logo image
+        var webLogoObj = new Image();
+        webLogoObj.onload = function () {
+            bg = new Konva.Image({
+                image: webLogoObj,
+                x: 1200 - this.width,
+                y: 20,
+                draggable: false
+            });
+            layer.add(bg);
+            stage.add(layer);
+        };
+        webLogoObj.src = `./img/web_logo/${webLogo}-logo.png`;
+        // End - Website Logo image
+    });
+
     // Fill Team after choose league
     $s_league.change(function () {
         let league = $(this).val();
@@ -155,17 +184,9 @@ $(function () {
     $("button#create").click(function () {
         var img_src = $s_team.val();
         var formation = $s_formation.val();
-        var webLogo = $('input[name="logo"]:checked').val();
         var homeAwayText = $('input[name="home_away"]:checked').val();
 
         homeAwayText += '\n' + formationJSON[formation].plan;
-
-        // Begin - create stage for field
-        var stage = new Konva.Stage({
-            container: "container",
-            width: 1200,
-            height: 627
-        });
 
         var layer = new Konva.Layer();
         stage.add(layer);
@@ -228,21 +249,6 @@ $(function () {
         };
         mascotObj.src = "./img/web_logo/mascot_h200.png";
         // End - Mascot image
-
-        // Begin - Website Logo image
-        var webLogoObj = new Image();
-        webLogoObj.onload = function () {
-            bg = new Konva.Image({
-                image: webLogoObj,
-                x: 1200 - this.width,
-                y: 20,
-                draggable: false
-            });
-            layer.add(bg);
-            stage.add(layer);
-        };
-        webLogoObj.src = `./img/web_logo/${webLogo}-logo.png`;
-        // End - Website Logo image
 
         // Begin - Create Logo for formation
         $.each(formationJSON[formation].formation, function (key, val) {
