@@ -7,10 +7,35 @@ const $s_team = $("select#team");
 const $s_formation = $("select#formation");
 const $r_weblogo = $("input[name='logo']");
 
-$.getJSON("./data/all-team.json", function (data) {
-    $.each(data, function (key, val) {
-        $s_team.append('<option value="' + key + '">' + val.name + "</option>");
-    });
+// http://newstarsoccer.org/api-get-teams 1.25s
+// ./data/all-team.json 331.23ms
+$.getJSON("http://newstarsoccer.org/api-get-teams", function (data) {
+    var options = {
+        data: data,
+        getValue: "team_name",
+        list: {
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            },
+            maxNumberOfElements: 3000,
+            onSelectItemEvent: function () {
+                var value = $("#team-data").getSelectedItemData().team_img;
+                $("#data-holder").val(value).trigger("change");
+            }
+        }
+    };
+
+    $("#team-data").easyAutocomplete(options);
+    // $("#data-holder").change(function () {
+    //     console.log($(this).val());
+    // });
+    
+    // $.each(data, function (key, val) {
+    //     $s_team.append('<option value="' + val.team_img + '">' + val.team_name + "</option>");
+    // });
 });
 
 $.getJSON("./data/formation.json", function (data) {
@@ -27,8 +52,8 @@ $.getJSON("./data/formation.json", function (data) {
 });
 
 var createImageAndText = (val, img_src, stage, layer, isCoach) => {
-    var x = val.x - 21;
-    var y = val.y - 21;
+    var x = val.x - 26;
+    var y = val.y - 26;
     var imageObj = new Image();
     imageObj.src = img_src;
     imageObj.onload = function () {
@@ -36,8 +61,8 @@ var createImageAndText = (val, img_src, stage, layer, isCoach) => {
             image: imageObj,
             x: x,
             y: y,
-            width: 70,
-            height: 70,
+            width: 65,
+            height: 65,
             draggable: false
         });
 
@@ -163,7 +188,7 @@ $(function () {
     });
 
     $("button#create").click(function () {
-        var img_src = $s_team.val();
+        var img_src = $("#data-holder").val();
         var formation = $s_formation.val();
         var webLogo = $('input[name="logo"]:checked').val();
         var homeAwayText = $('input[name="home_away"]:checked').val();
@@ -240,6 +265,8 @@ $(function () {
             "y": 527
         };
         createImageAndText(positonCoach, img_src, stage, layer, true);
+
+        $('input[name="logo"]').prop('checked', false);
         $('input[name="logo"]').prop('disabled', false);
     });
 });
