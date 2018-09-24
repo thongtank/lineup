@@ -135,28 +135,31 @@ $(function () {
     var stage = new Konva.Stage({
         container: "container",
         width: 1200,
-        height: 627,
+        height: 627
     });
 
     var layer = new Konva.Layer();
-    $r_weblogo.change(function() {
-        layer.destroy();
+    // stage.add(layer);
+
+    var webLogoObj = new Image();
+    webLogoObj.onload = function () {
+        // let x = 1200 - this.width;
+        bg = new Konva.Image({
+            image: webLogoObj,
+            x: 1200 - this.width,
+            y: 10,
+            draggable: false
+        });
+        layer.add(bg);
         stage.add(layer);
-        let webLogo = $(this)[0].defaultValue;
-        // Begin - Website Logo image
-        var webLogoObj = new Image();
-        webLogoObj.onload = function () {
-            bg = new Konva.Image({
-                image: webLogoObj,
-                x: 1200 - this.width,
-                y: 20,
-                draggable: false
-            });
-            layer.add(bg);
-            stage.add(layer);
-        };
-        webLogoObj.src = `./img/web_logo/${webLogo}-logo.png`;
-        // End - Website Logo image
+    };
+    // webLogoObj.src = `./img/web_logo/newstar-logo.png`;
+    // End - Website Logo image
+
+    // When change radio Web Logo
+    $r_weblogo.on('change', function () {
+        let photoName = $(this)[0].defaultValue;
+        webLogoObj.src = `./img/web_logo/${photoName}-logo_w237.png`;
     });
 
     // Fill Team after choose league
@@ -186,12 +189,10 @@ $(function () {
     $("button#create").click(function () {
         var img_src = $s_team.val();
         var formation = $s_formation.val();
+        var webLogo = $('input[name="logo"]:checked').val();
         var homeAwayText = $('input[name="home_away"]:checked').val();
 
         homeAwayText += '\n' + formationJSON[formation].plan;
-
-        // var layer = new Konva.Layer();
-        // stage.add(layer);
 
         var bgObj = new Image();
         bgObj.onload = function () {
@@ -263,7 +264,6 @@ $(function () {
             "y": 527
         };
         createImageAndText(positonCoach, img_src, stage, layer, true);
-
         $('input[name="logo"]').prop('disabled', false);
     });
 });

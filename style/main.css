@@ -6,6 +6,11 @@
     width: 1200px;
     height: 627px;
     font-family: 'Notable', sans-serif;
+    z-index: 0;
+}
+
+#weblogo {
+    z-index: 9999;
 }
 
 div.field>div,
