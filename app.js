@@ -129,17 +129,19 @@ var createImageAndText = (val, img_src, stage, layer, isCoach) => {
 };
 
 $(function () {
+    $('input[name="logo"]').prop('disabled', true);
+
     // Begin - create stage for field
     var stage = new Konva.Stage({
         container: "container",
         width: 1200,
-        height: 627
+        height: 627,
     });
 
+    var layer = new Konva.Layer();
     $r_weblogo.change(function() {
-        var layer = new Konva.Layer();
+        layer.destroy();
         stage.add(layer);
-        
         let webLogo = $(this)[0].defaultValue;
         // Begin - Website Logo image
         var webLogoObj = new Image();
@@ -188,8 +190,8 @@ $(function () {
 
         homeAwayText += '\n' + formationJSON[formation].plan;
 
-        var layer = new Konva.Layer();
-        stage.add(layer);
+        // var layer = new Konva.Layer();
+        // stage.add(layer);
 
         var bgObj = new Image();
         bgObj.onload = function () {
@@ -261,5 +263,7 @@ $(function () {
             "y": 527
         };
         createImageAndText(positonCoach, img_src, stage, layer, true);
+
+        $('input[name="logo"]').prop('disabled', false);
     });
 });
