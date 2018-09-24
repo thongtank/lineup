@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lineup</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="./js/EasyAutocomplete-1.3.5/easy-autocomplete.min.css">
     <link rel="stylesheet" href="./style/main.css">
 </head>
 
@@ -30,25 +31,26 @@
                 </div>
             </div>
             <div class="field">
-                <div class="select">
-                    <select id="league">
-                        <option value="">Select League</option>
-                    </select>
+                <div class="control">
+                    <label class="label" for="formation">Formation</label>
+                    <div class="select">
+                        <select id="formation" name="formation">
+                            <option>Select Formation</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="field">
-                <div class="select">
-                    <select id="team">
-                        <option value="">Select Team</option>
-                    </select>
+                <div class="control">
+                    <label class="label" for="team-data">Team</label>
+                    <input class="input" id="team-data" name="team-data" placeholder="Enter team" />
+                    <input class="is-hidden" id="data-holder" />
                 </div>
-            </div>
-            <div class="field">
-                <div class="select">
-                    <select id="formation">
-                        <option>Select Formation</option>
-                    </select>
-                </div>
+                <!-- <div class="select">
+                        <select id="team">
+                            <option value="">Select Team</option>
+                        </select>
+                    </div> -->
             </div>
             <div class="field">
                 <button id="create" class="button is-success">Create</button>
@@ -78,7 +80,10 @@
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     <script src="https://cdn.rawgit.com/konvajs/konva/2.3.0/konva.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./js/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+
     <script src="app.js"></script>
+
     <script>
         function cnvs_getCoordinates(e) {
             x = e.clientX;
