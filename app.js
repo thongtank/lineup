@@ -7,8 +7,6 @@ const $s_team = $("select#team");
 const $s_formation = $("select#formation");
 const $r_weblogo = $("input[name='logo']");
 
-// http://newstarsoccer.org/api-get-teams 1.25s
-// ./data/all-team.json 331.23ms
 $.getJSON("./data/all-team.json", function (data) {
     var options = {
         data: data,
