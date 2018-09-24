@@ -9,7 +9,7 @@ const $r_weblogo = $("input[name='logo']");
 
 // http://newstarsoccer.org/api-get-teams 1.25s
 // ./data/all-team.json 331.23ms
-$.getJSON("http://newstarsoccer.org/api-get-teams", function (data) {
+$.getJSON("./data/all-team.json", function (data) {
     var options = {
         data: data,
         getValue: "team_name",
