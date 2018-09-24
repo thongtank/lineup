@@ -1,0 +1,19 @@
+[{
+        "id": 5,
+        "team_name": "แมนซิตี้",
+        "team_img": "http://newstarsoccer.org/img/uploads/teams_logo/1515055370.png",
+        "nationality_id": "1"
+    },
+    {
+        "id": 6,
+        "team_name": "แมนยูู",
+        "team_img": "http://newstarsoccer.org/img/uploads/teams_logo/1515055388.png",
+        "nationality_id": "1"
+    },
+    {
+        "id": 7,
+        "team_name": "เชลซี",
+        "team_img": "http://newstarsoccer.org/img/uploads/teams_logo/1515054356.png",
+        "nationality_id": "1"
+    },
+]

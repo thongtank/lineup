@@ -7,9 +7,9 @@ const $s_team = $("select#team");
 const $s_formation = $("select#formation");
 const $r_weblogo = $("input[name='logo']");
 
-$.getJSON("./data/league.json", function (data) {
+$.getJSON("./data/all-team.json", function (data) {
     $.each(data, function (key, val) {
-        $s_league.append('<option value="' + key + '">' + val.name + "</option>");
+        $s_team.append('<option value="' + key + '">' + val.name + "</option>");
     });
 });
 
@@ -160,30 +160,6 @@ $(function () {
     $r_weblogo.on('change', function () {
         let photoName = $(this)[0].defaultValue;
         webLogoObj.src = `./img/web_logo/${photoName}-logo_w237.png`;
-    });
-
-    // Fill Team after choose league
-    $s_league.change(function () {
-        let league = $(this).val();
-        $s_team.html('<option value="">Select Team</option>');
-        if (league != "") {
-            $.getJSON("./data/league.json", function (data) {
-                if (data[league].hasOwnProperty("teams")) {
-                    $.each(data[league].teams, function (key, val) {
-                        // $s_team.append('<option value="' + val + '">' + val.charAt(0).toUpperCase() + val.substr(1) + '</option>');
-                        $s_team.append(
-                            '<option value="./img/logo/' +
-                            league +
-                            "/" +
-                            val.logo +
-                            '">' +
-                            val.name +
-                            "</option>"
-                        );
-                    });
-                }
-            });
-        }
     });
 
     $("button#create").click(function () {
