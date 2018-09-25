@@ -79,12 +79,12 @@ var createImageAndText = (val, img_src, stage, layer, isCoach) => {
         if (isCoach) {
             // If Coach
             x = x + 75;
-            y = y + 11;
+            y = y + 15;
             alignText = 'left';
             textColor = '#000';
         } else {
             // If player
-            x = x - 65;
+            x = x - 68;
             y = y + 75;
             alignText = 'center';
             textColor = '#fff';
@@ -94,7 +94,7 @@ var createImageAndText = (val, img_src, stage, layer, isCoach) => {
             text: "Click to edit",
             x: x,
             y: y,
-            fontSize: 28,
+            fontSize: 20,
             fill: textColor,
             align: alignText,
             width: 200,
@@ -260,7 +260,7 @@ $(function () {
 
         var positonCoach = {
             "x": 52,
-            "y": 527
+            "y": 534
         };
         createImageAndText(positonCoach, img_src, stage, layer, true);
 
